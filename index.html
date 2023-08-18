@@ -65,6 +65,7 @@
                 paddleX = relativeX - paddleWidth / 2;
             }
             e.preventDefault();
+            e.stopPropagation();
         }
     }
     function mouseMoveHandler(e) {
