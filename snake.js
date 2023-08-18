@@ -199,6 +199,9 @@ let touch_start_y = null;
 function touchStartHandler(event) {
     if (event.touches){
         event.preventDefault();
+        if (has_game_ended()) {
+            location.reload();
+        }
     }
     touch_start_x = event.touches[0].clientX;
     touch_start_y = event.touches[0].clientY;
