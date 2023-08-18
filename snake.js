@@ -214,7 +214,9 @@ function touchMoveHandler(event) {
     if (!touch_start_x || !touch_start_y) {
         return;
     }
-
+    if (has_game_ended()) {
+        location.reload();
+    }
     let touch_end_x = event.touches[0].clientX;
     let touch_end_y = event.touches[0].clientY;
 
