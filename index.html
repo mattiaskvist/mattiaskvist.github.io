@@ -63,8 +63,8 @@
             var relativeX = e.touches[0].pageX - canvas.offsetLeft;
             if (relativeX > paddleWidth / 2 && relativeX < canvas.width - paddleWidth / 2) {
                 paddleX = relativeX - paddleWidth / 2;
-                e.preventDefault();
             }
+            e.preventDefault();
         }
     }
     function mouseMoveHandler(e) {
