@@ -162,21 +162,25 @@ document.addEventListener("keydown", keyDownHandler, false);
 function keyDownHandler(event) {
     switch (event.key) {
         case "ArrowLeft":
+        case "a":
             if (dx == 10) return;
             dx = -10;
             dy = 0;
             break;
         case "ArrowRight":
+        case "d":
             if (dx == -10) return;
             dx = 10;
             dy = 0;
             break;
         case "ArrowUp":
+        case "w":
             if (dy == 10) return;
             dx = 0;
             dy = -10;
             break;
         case "ArrowDown":
+        case "s":
             if (dy == -10) return;
             dx = 0;
             dy = 10;
@@ -200,9 +204,7 @@ function touchStartHandler(event) {
     if (event.touches){
         event.preventDefault();
     }
-    if (has_game_ended()) {
-        location.reload();
-    }
+
     touch_start_x = event.touches[0].clientX;
     touch_start_y = event.touches[0].clientY;
 } 

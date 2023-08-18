@@ -2,26 +2,72 @@
 <html lang="en">
 
 <head>
-    <title>Snake Game</title>
+    <title>Mattias Kvist Portfolio</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet href="style.css">
 </head>
 
 <body>
-    <div style="touch-action: none;" id="snakediv">
-        <canvas id="snakeboard" width="400" height="400"></canvas>
-    </div>
+    <h1>Mattias Kvist Portfolio</h1>
+    <div class="project-grid">
+        <div class="project-card">
+            <a href="snake.html">
+                <img src="snake.png" alt="Snake Game">
+                <h2>Snake Game</h2>
+            </a>
+            <p>Snake game made with HTML, CSS and JavaScript.
+                Has support for both keyboard and touch controls.</p>
+            <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Game</span>
+                <span class="tag">Mobile</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <a href="lostinorbit.html">
+                <img src="lostinorbitstart.png" alt="Lost In Orbit">
+                <h2>Lost in Orbit</h2>
+            </a>
+            <p>Lost in Orbit is a 2D platformer game made in java as a 4 week project in the course DD1349
+                (projinda23) at KTH. Collaboration with Nima Cheraghi.</p>
+            <p>Lost in Orbit is a 2D platformer game where players navigate a
+                solar system to reach their ship after colliding with an asteroid. Developed in Java using the Swing
+                framework, it features enemies,
+                collectibles, and nine levels across three planets. A checkpoint system lets players restart at the
+                first level of a planet after defeat.</p>
+            <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">Swing</span>
+                <span class="tag">Game</span>
+            </div>
+            
+        </div>
+        <div class="project-card">
+            <a href="https://kvalkollen.se">
+                <img src="kvalkollen.png" alt="Kvalkollen">
+                <h2>Kvalkollen</h2>
+            </a>
+            <p>Streamlining Swimmer Qualifications for Swedish Championships using python for webscraping and data
+                manipulation.</p>
+
+            <p>Kvalkollen is a website designed to simplify the compilation of swimmers' results and
+                qualifications for various Swedish championships. The times are sourced from Tempus Open
+                and are presented in a manner that makes it easy to identify achieved qualification standards.</p>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">HTML</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">BeautifulSoup</span>
+                <span class="tag">Flask</span>
+            </div>
+        </div>
+            <!--Add more projects here-->
+
 </body>
 
 <script src="snake.js"></script>
-<style>
-    #snakeboard {
-        position: absolute;
-        
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
+
 
 </html>
