@@ -50,7 +50,6 @@ function main() {
         draw_bird();
         draw_score();
         draw_high_score();
-        requestAnimationFrame(main);
         return;
     }
 
@@ -61,8 +60,8 @@ function main() {
     draw_pipes();
     draw_score();
     draw_high_score();
-    requestAnimationFrame(main);
 }
+setInterval(main, 10);
 
 function draw_bird() {
     board_ctx.fillStyle = bird_col;
