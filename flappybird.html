@@ -2,19 +2,19 @@
 <html lang="en">
 
 <head>
-    <title>Snake Game</title>
+    <title>Flappy Game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=stylesheet href="style.css">
 </head>
 
 <body>
-    <h1>Snake Game</h1>
+    <h1>Flappy Game</h1>
     <div class="container">
         <p><strong>Project Description</strong></p>
-        <p>Snake game made with HTML, CSS and JavaScript. Has support for both keyboard and touch controls.</p>
-        <div class="gamediv">
-            <canvas id="snakeboard" width="400" height="400"></canvas>
+        <p>Flappy Bird-like game made with HTML, CSS and JavaScript. Has support for both keyboard and touch controls.</p>
+        <div style="touch-action: none" class="gamediv" >
+            <canvas id="flappyboard" width="400" height="600"></canvas>
         </div>
         <p><strong>Key Features</strong></p>
         <ul>
@@ -23,12 +23,12 @@
         </ul>
         <p><strong>Controls</strong></p>
         <ul>
-            <li>Arrow keys / WASD - Move snake</li>
+            <li>W / ArrowUp / Spacebar / Click / Touch - Flap</li>
         </ul>
-        <a href="https://github.com/mattiaskvist/Snake_Game"><p><strong>GitHub Repository</strong></p></a>
+        <a href="https://github.com/mattiaskvist/Flappy_Game"><p><strong>GitHub Repository</strong></p></a>
     </div>
 
-    <script src="snake.js"></script>
+    <script src="flappybird.js"></script>
 </body>
 
 </html>
