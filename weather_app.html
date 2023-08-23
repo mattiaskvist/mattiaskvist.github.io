@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="weather_app.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="map"></div>
+
+        <div class="search">
+            <input type="text" id="locationInput" placeholder="Search for a location">
+            <button id="searchButton">Search</button>
+            <button id="currentLocationButton">Find My Location</button>
+        </div>
+        <div id="coordinates">
+            <p id="lat"></p>
+            <p id="lng"></p>
+            <button id="forecastButton">Get Forecast For Coordinates</button>
+        </div>
+        <div class="forecast">
+            <h2>Weather Forecast</h2>
+            <div id="forecastContainer" class="forecast-container">
+                <!--Forecast items will be displayed here-->
+                <p>Click "Get Forecast For Coordinates" to get forecast</p>
+            </div>
+            <a href="https://github.com/mattiaskvist/weather_app" target="_blank">Source Code</a>
+        </div>
+    </div>
+    <script src="weather_app.js"></script>
+
+</body>
+
+</html>
