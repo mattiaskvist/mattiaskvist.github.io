@@ -1,4 +1,6 @@
-// Initialize Leaflet map
+/**
+ * Initialize Leaflet map and marker
+ */
 var map = L.map('map').setView([59.03, 18.27], 9);
 var marker = L.marker([59.03, 18.27]).addTo(map);
 
@@ -12,7 +14,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-
+/**
+ * Listen for map click event to update marker position
+ */
 function onMapClick(e) {
     marker
         .setLatLng(e.latlng)
@@ -22,6 +26,9 @@ function onMapClick(e) {
     updateLatLng();
 }
 
+/**
+ * Function to update latitude and longitude display
+ */
 function updateLatLng() {
     lat = marker.getLatLng().lat.toFixed(6);
     lng = marker.getLatLng().lng.toFixed(6);
@@ -36,6 +43,9 @@ var locationInput = document.getElementById("locationInput");
 var searchButton = document.getElementById("searchButton");
 var currentLocationButton = document.getElementById("currentLocationButton");
 
+/**
+ * Handle search button click event to get location from input
+ */
 searchButton.addEventListener("click", function () {
     var locationName = locationInput.value;
     var url = "https://nominatim.openstreetmap.org/search?q=" + locationName + "&format=json&polygon=1&addressdetails=1";
@@ -62,7 +72,9 @@ searchButton.addEventListener("click", function () {
         );
 });
 
-// Get current location
+/**
+ * Handle current location button click event to get current location
+ */
 currentLocationButton.addEventListener("click", function () {
     map.locate({ setView: true, maxZoom: 15 });
     // set marker to current location
@@ -82,18 +94,35 @@ currentLocationButton.addEventListener("click", function () {
     );
 });
 
-
+/**
+ * Process weather forecast data and display in forecast boxes
+ */
 function processWeatherForecast(data) {
     var forecastContainer = document.getElementById("forecastContainer");
 
     // Remove any existing forecast data
     forecastContainer.innerHTML = ""
 
+    var currentDate = null;
+
     // Loop through each timeSeries object
     data.timeSeries.forEach(function (timeSeries) {
         // Get the valid time for the forecast
         var validTime = new Date(timeSeries.validTime).toLocaleString();
         var formattedValidTime = validTime.slice(0, -3);
+        var currentTime = formattedValidTime.split(" ")[1];
+
+        var currentDay = formattedValidTime.split(" ")[0];
+
+        // If the current day is different from the previous day, add a header
+        if (currentDay !== currentDate) {
+            // Create new box for the day's header
+            var dayBox = document.createElement("div");
+            dayBox.classList.add("forecast-day-box");
+            dayBox.innerHTML = `<h2>${currentDay}</h2>`;
+            forecastContainer.appendChild(dayBox);
+            currentDate = currentDay;
+        }
 
         // Initialize variables to store extracted data
         var temperature, windSpeed, windDirectionDeg, windGustSpeed, weatherSymbol;
@@ -151,7 +180,7 @@ function processWeatherForecast(data) {
         box.classList.add("forecast-box");
         box.innerHTML = `
             <div class="forecast-content"> 
-            <p>${formattedValidTime}</p>
+            <p style="font-size:140%"><strong>${currentTime}</strong></p>
             <p>Temp: ${temperature} °C</p>
             <p>Wind Speed: ${windSpeed} (${windGustSpeed}) m/s</p>
             <p>Wind Dir: ${windDirectionText} (${windDirectionDeg}°)</p>
@@ -165,11 +194,13 @@ function processWeatherForecast(data) {
     // Add time of last update
     var lastUpdated = new Date(data.approvedTime).toLocaleString();
     var formattedLastUpdated = lastUpdated.slice(0, -3);
-    forecastContainer.innerHTML += `<p>Last updated: ${formattedLastUpdated}</p>`;
+    forecastContainer.innerHTML += `<p>Forecast last updated: ${formattedLastUpdated}</p>`;
     forecastContainer.innerHTML += `<p> <a href="https://opendata.smhi.se/apidocs/metfcst/index.html" target="_blank">Source: SMHI Open Data API</a></p>`;
 }
 
-// Function to get weather forecast data from SMHI API
+/**
+ * Get weather forecast data from SMHI API
+ */
 function getWeatherForecast(lat, lon) {
     var apiUrl = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon}/lat/${lat}/data.json`;
 
@@ -192,4 +223,39 @@ function getWeatherForecast(lat, lon) {
 var weatherButton = document.getElementById("forecastButton");
 weatherButton.addEventListener("click", function () {
     getWeatherForecast(lat, lng);
+    saveCoordinatesToLocalStorage(lat, lng); // Save coordinates to local storage
+});
+
+/**
+ * Save coordinates to local storage
+ */
+function saveCoordinatesToLocalStorage(lat, lng) {
+    localStorage.setItem("selectedLat", lat);
+    localStorage.setItem("selectedLng", lng);
+}
+
+/**
+ * Retrieve coordinates from local storage
+ */
+function getCoordinatesFromLocalStorage() {
+    var lat = localStorage.getItem("selectedLat");
+    var lng = localStorage.getItem("selectedLng");
+    return { lat: lat, lng: lng };
+}
+
+/**
+ * Check local storage for stored coordinates on page load
+ */
+window.addEventListener("load", function () {
+    var storedCoordinates = getCoordinatesFromLocalStorage();
+    if (storedCoordinates.lat && storedCoordinates.lng) {
+        lat = storedCoordinates.lat;
+        lng = storedCoordinates.lng;
+        // Set map center and fetch weather forecast
+        map.setView([lat, lng], 13);
+        getWeatherForecast(lat, lng);
+        // Update coordinates and marker
+        marker.setLatLng([lat, lng]);
+        updateLatLng();
+    }
 });
